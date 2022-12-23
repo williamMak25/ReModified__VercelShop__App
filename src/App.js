@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
+import { Cart } from './display/cart/Cart';
+import { Category } from './display/category/category';
+import { Header } from './display/header/header';
+import { HomePage } from './display/HomePage/homepage';
+import { ItemDetail } from './display/itemsDetail/ItemDetail';
+import { LoginPage } from './display/LoginPage/LoginPage';
+import { Profile } from './display/Profile/profile';
+import { SignUp } from './display/signUp/SignUp';
+import { FireStoreContextProvider, useAuth } from './fireStoreContext/fireStoreContext';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <FireStoreContextProvider>
+        <BrowserRouter>
+        <Header/>
+          <Routes>
+            <Route path='/' element={ <HomePage/>}/>
+            <Route path='/signup' element={<SignUp/>}/>
+            <Route path='/login' element={<LoginPage/>}/>
+            <Route path='/profile' element={<Profile/>}/>
+            <Route path='/cart' element={<Cart/>}/>
+            <Route path='/products/:id' element={<ItemDetail/>}/>
+            <Route path='/category/:type' element={<Category/>}/>
+          </Routes>
+        </BrowserRouter>
+      </FireStoreContextProvider>
+    </>
   );
 }
 

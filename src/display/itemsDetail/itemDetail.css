@@ -1,0 +1,35 @@
+.itemDetailContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    font-size: 30px;
+    font-weight: 200;
+}
+.price{
+    font-size: 20px;
+    color: green;
+}
+.photo{
+    width: 200px;
+    height: 200px;
+}
+.description{
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+}   
+.cartBut{
+    background-color: rgb(92, 89, 89);
+    width: 100px;
+    color: white;
+    margin: 10px;
+}
+.toHome{
+    background-color: rgb(92, 89, 89);
+    width: 100px;
+    color: white;
+    margin: 10px;
+}
