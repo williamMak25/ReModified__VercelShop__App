@@ -1,0 +1,9 @@
+.bottom{
+    width: 150px;
+    height: 40px;
+    margin-top:10px;
+    margin-bottom: 0;
+    background-color: rgb(43, 37, 43);
+    text-align: center;
+    color:white;
+}

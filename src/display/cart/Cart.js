@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { addItems, getProducts, getTotalPrice, reduceItems, removeItems } from '../../redux/feature/postSlice'
 import './cart.css'
-export const Cart = () => {
 
+export const Cart = () => {
 const {filterItem,itemTotalPrice} = useSelector((state) => state.add)
 const dispatch = useDispatch()
-console.log(itemTotalPrice)
+const navigate = useNavigate()
 
 useEffect(()=>{
         dispatch(getProducts())
@@ -29,37 +30,43 @@ const handleReduceItem = (ite) =>{
 }
 
   return (
-<div className='cartPageContainer'>
+<div className='container position-relative'>
+
+    <hr className=' text-center mb-1'/>
+    <h2 className='text-center mt-3'>Cart History</h2>
+    <p className='bi bi-box-arrow-left text-center m-0 ' onClick={()=>navigate('/')} style={{cursor:'pointer'}}> Home</p>
+    <hr className=' text-center mb-1 mt-0'/>
     {filterItem.length === 0 ?  
-        (<div>
-            <h1>Your Cart is Empty</h1>
+        (<div className='p-5 m-2'>
+            <h1 className='text-center my-5'>Your Cart is Empty</h1>
         </div>)   
     :
-    (<div className='carContainer'>
+    (<div className='container p-3 p-sm-1'>
+        
         {filterItem.map((ite)=>{
             return( 
-        <div className='cart'>
+        <div className='position-relative d-flex flex-row justify-content-around align-items-center m-3 p-2 border-top border-bottom responsive_cart'>
 
-            <div className='itemDescription'>
-                <p>{ite.title}</p>
-                <img style={{width:50,height:50,margin:10}} src={ite.image}/>             
-                <button onClick={()=>handleRemove(ite)}>Remove</button>
+            <div className='w-25'>
+                <img className='img-fluid res_photo' src={ite.image}/>             
             </div>
-                
-            <p className='cartPrice'>$ {ite.price}</p>
-                
-            <div className='itemQuantityContainer'>
-                    <button onClick={()=>handleReduceItem(ite)}>-</button>
-                    <p className='quantity'>{ite.itemsQuantity}</p>
-                    <button onClick={()=>handleAddItem(ite)}>+</button>
+            <div>
+                <p className='text-center'>$ {ite.price}</p>  
+                <div className='d-flex flex-row mb-2'>
+                    <button className='btn btn-outline-dark' onClick={()=>handleReduceItem(ite)}>-</button>
+                    <p className='text-center mx-2 mb-0 pt-2'>{ite.itemsQuantity}</p>
+                    <button className='btn btn-outline-dark' onClick={()=>handleAddItem(ite)}>+</button>
+                </div>
             </div>
-            <div className='totalPrice'>$ {ite.price * ite.itemsQuantity}</div>
+            <div className=''>$ {ite.price * ite.itemsQuantity}</div>
+            <i className="bi bi-x-lg position-absolute top-0 end-0"onClick={()=>handleRemove(ite)}></i>
         </div>)
         })}
-        <div className='subtotal'>
-            <h2>Total price</h2>
-            <h1>$ {itemTotalPrice}</h1>
-            <button className='paidBut'>Paid</button>
+        
+        <div className='float-end m-2 p-2'>
+            <p className='text-center w-100 pb-2 border-bottom border-dark'>Total price : ${itemTotalPrice.toFixed(2)}</p>
+            
+            <button className='btn btn-success w-100' onClick={()=>navigate('/payment')}>Paid</button>
         </div>
     </div>)}
 </div>

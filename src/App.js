@@ -7,6 +7,7 @@ import { Header } from './display/header/header';
 import { HomePage } from './display/HomePage/homepage';
 import { ItemDetail } from './display/itemsDetail/ItemDetail';
 import { LoginPage } from './display/LoginPage/LoginPage';
+import { StripeContainer } from './display/payment/stripeContainer';
 import { Profile } from './display/Profile/profile';
 import { SignUp } from './display/signUp/SignUp';
 import { FireStoreContextProvider, useAuth } from './fireStoreContext/fireStoreContext';
@@ -24,6 +25,7 @@ function App() {
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/products/:id' element={<ItemDetail/>}/>
             <Route path='/category/:type' element={<Category/>}/>
+            <Route path='/payment' element={<StripeContainer/>}/>
           </Routes>
         </BrowserRouter>
       </FireStoreContextProvider>

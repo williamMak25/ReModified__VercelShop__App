@@ -1,35 +1,17 @@
-.itemDetailContainer{
+.responsiveBox{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: end;
 }
-.title{
-    font-size: 30px;
-    font-weight: 200;
-}
-.price{
-    font-size: 20px;
-    color: green;
-}
-.photo{
-    width: 200px;
-    height: 200px;
-}
-.description{
-    width: 50%;
-    text-align: center;
-    font-size: 18px;
-}   
-.cartBut{
-    background-color: rgb(92, 89, 89);
-    width: 100px;
-    color: white;
-    margin: 10px;
-}
-.toHome{
-    background-color: rgb(92, 89, 89);
-    width: 100px;
-    color: white;
-    margin: 10px;
+@media(max-width:395px){
+    .responsiveBox{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .res_img{
+        height: 100%;
+        width: 100%;
+    }
 }

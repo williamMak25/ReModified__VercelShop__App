@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../fireStoreContext/fireStoreContext'
-import './Login.css'
 
 export const LoginPage = () => {
     const {signIn,Loading} = useAuth()
@@ -17,20 +16,16 @@ export const LoginPage = () => {
 
   return (
     <>
-    <div className='warp'>
-    <div className='loginFormContainer'>
-        <form onSubmit={handleSubmit} className='loginForm'>
-            <h1>Log In Your Account</h1>
-            <div className='loginEmailContainer'>
-                <input type='email' id='email' required onChange={(e)=>setEmail(e.target.value)} placeholder='Email'/>
-            </div>
-            <div className='loginPasswordContainer'>
-                <input type='password' id='password' required onChange={(e)=>setPassword(e.target.value)} placeholder='Password'/>
-            </div>
-            <button>Log In</button>
-            <div className='infoContainer'>
-                <h3>If You don't have a account? <NavLink to='/signup'>Sign Up</NavLink></h3>
-            </div>
+    <div className='p-5'>
+    <div className='d-flex flex-column justify-content-center align-items-center'>
+        <form onSubmit={(e) => handleSubmit(e)} className='d-flex flex-column h-100'>
+                <h4 className='text-center'>Log in your account</h4>
+                <label for='email' className='form-label mt-3'>Email</label>
+                <input type='email' className='form-control' id='email' required onChange={(e)=>setEmail(e.target.value)} />
+                <label for='email' className='form-label mt-3'>Password</label>
+                <input type='password' className='form-control' id='password' required onChange={(e)=>setPassword(e.target.value)}/>
+                <button className='btn btn-primary my-3'>Log In</button>
+                <p>If You don't have a account? <NavLink to='/signup'>Sign Up</NavLink></p>
         </form>
         
     </div>

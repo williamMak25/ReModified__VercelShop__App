@@ -14,34 +14,37 @@ export const useAuth = () =>{
 export const FireStoreContextProvider = ({children}) => {
     const [err,setErr] = useState('');
     const [currentUser,setCurrentUser] = useState([]);
-    const [userData,setUserData] = useState([])
+    const [userData,setUserData] = useState([]);
     const colRef = collection(db,'userData')
+
     console.log(userData)
-    console.log(currentUser)
     useEffect(()=>{
-        onAuthStateChanged(auth, (user)=>{ 
+        onAuthStateChanged(auth, (user)=>{
             if(user){
-                 setCurrentUser(user)
+                setCurrentUser(user)
+                getDocs(colRef)
+                .then((snapshot)=>{
+                    let data = []
+                    snapshot.docs.map((doc)=>{
+                    return data.push({...doc.data(),id:doc.id})
+                    }) 
+                    setUserData(data)
+                })   
+            .catch(error => error.message)
+           
             }else{
              console.log('no user have found')
             }
         })
     },[])
-    const Loading = () => {
-        if(currentUser.length === 0){
-            return(
-              alert('your are still there')
-            )
-        }
-    }
     const  signUp = (email,password,username) =>{
         setErr('')
         createUserWithEmailAndPassword(auth,email,password)
         .then(async (result)=>{
-            console.log(result.user)
             const ref = doc(db,'userData',result.user.uid) // to read 'doc' document 
-            const docRef = await setDoc(ref,{username})  // to read 'setDoc' document
+            const docRef = await setDoc(ref,{name:username})  // to read 'setDoc' document
             //await addDoc(ref,{username})
+
 
         })
         .then((al)=>{
@@ -51,6 +54,23 @@ export const FireStoreContextProvider = ({children}) => {
             console.log(error.message)
             setErr(error)
         })
+    }
+    const userInfo = async(firstname,lastname,address,postcode,country,phno) =>{
+        const ref = doc(db,'userData',currentUser.uid) 
+            setDoc(ref,{
+                name:`${firstname}${lastname}`,
+                country:country,
+                postalcode:postcode,
+                address:address,
+                phnumber:phno
+            }).then((al)=>{
+                alert('your data is ready')
+            })
+            .catch((error)=>{
+                console.log(error.message)
+
+            })
+       
     }
     const signIn = (email,password) =>{
         setErr('')
@@ -63,19 +83,6 @@ export const FireStoreContextProvider = ({children}) => {
         })
     }
 
-    useEffect(()=>{
-            getDocs(colRef)
-            .then((snapshot)=>{
-                let data = []
-                snapshot.docs.map((doc)=>{
-                return data.push({...doc.data(),id:doc.id})
-                }) 
-                setUserData(data)
-            })
-            .catch(err => err.message)
-    
-        },[])
-
         
     const value ={
         userData,
@@ -83,7 +90,7 @@ export const FireStoreContextProvider = ({children}) => {
         signUp,
         signIn,
         err,
-        Loading
+        userInfo
     }
   return (
     <authContext.Provider value={value}>
