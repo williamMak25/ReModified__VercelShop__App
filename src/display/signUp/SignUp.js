@@ -2,7 +2,6 @@ import React from 'react'
 import { useAuth } from '../../fireStoreContext/fireStoreContext'
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import './signup.css'
 
 
 export const SignUp = () => {

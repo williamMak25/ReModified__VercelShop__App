@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useParams } from 'react-router-dom'
 import { getProducts } from '../../redux/feature/postSlice'
-import './category.css'
 
 export const Category = () => {
     const [filterItem,setFilterItem] = useState([])

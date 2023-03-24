@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Navigate, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../fireStoreContext/fireStoreContext'
 import { auth } from '../../redux/firebase'
-import './profile.css'
+
 
 export const Profile = () => {
 const {currentUser,userData,isLoading} = useAuth()
