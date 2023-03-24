@@ -44,11 +44,11 @@ export const Header = () => {
         <li className='list-group-item mx-2'><NavLink to='/category/electronics'className='text-decoration-none text-white'>Electronic</NavLink></li>
         <li className='list-group-item mx-2'><NavLink to='/category/jewelery'className='text-decoration-none text-white'>Jewelery</NavLink></li>
       </div>
-      <div className='d-flex flex-row justify-content-between p-0'>
-        {(currentUser.length === 0) ? ( <Link to='/login' className='text-decoration-none  text-white'><h2 className='list-group-item mx-2'><i className="bi bi-person"></i></h2></Link>) 
+      <div className='d-flex flex-row justify-content-between p-0 mb-0'>
+        {(currentUser.length === 0) ? ( <Link to='/login' className='text-decoration-none  text-white'><li className='list-group-item mx-2'><i className="bi bi-person"></i></li></Link>) 
         :
-        (<Link to='/profile' className='text-decoration-none text-white  pb-0'><li className='list-group-item mx-2'><i className="bi bi-person"></i></li></Link>)}  
-        <NavLink to='/cart' className='text-decoration-none text-white'><li className='list-group-item mx-2'><i className="bi bi-bag"></i></li></NavLink>
+        (<Link to='/profile' className='text-decoration-none text-white '><li className='list-group-item mx-2'><i className="bi bi-person"></i></li></Link>)}  
+        <NavLink to='/cart' className='text-decoration-none text-white'><li className='list-group-item mx-2'><i className="bi bi-minecart-loaded"></i></li></NavLink>
       </div>
     </nav>
   </>
